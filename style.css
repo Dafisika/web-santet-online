@@ -1,0 +1,520 @@
+/* ============ Ambient background ============ */
+.ambient-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background:
+        radial-gradient(120% 90% at 50% -10%, rgba(226, 171, 21, 0.09), transparent 55%),
+        linear-gradient(180deg, #101011 0%, #000000 60%);
+}
+
+.stars {
+    position: absolute;
+    inset: -12%;
+    background-image:
+        radial-gradient(1.6px 1.6px at 12% 22%, rgba(244, 214, 122, 0.55), transparent 100%),
+        radial-gradient(1.4px 1.4px at 68% 12%, rgba(226, 171, 21, 0.4), transparent 100%),
+        radial-gradient(1.2px 1.2px at 84% 46%, rgba(244, 214, 122, 0.35), transparent 100%),
+        radial-gradient(1.6px 1.6px at 28% 74%, rgba(226, 171, 21, 0.45), transparent 100%),
+        radial-gradient(1.2px 1.2px at 52% 58%, rgba(244, 214, 122, 0.3), transparent 100%),
+        radial-gradient(1.4px 1.4px at 8% 58%, rgba(226, 171, 21, 0.35), transparent 100%),
+        radial-gradient(1.2px 1.2px at 92% 82%, rgba(244, 214, 122, 0.3), transparent 100%),
+        radial-gradient(1.6px 1.6px at 42% 18%, rgba(226, 171, 21, 0.35), transparent 100%),
+        radial-gradient(1.2px 1.2px at 74% 68%, rgba(244, 214, 122, 0.28), transparent 100%),
+        radial-gradient(1.4px 1.4px at 20% 42%, rgba(226, 171, 21, 0.3), transparent 100%),
+        radial-gradient(1.2px 1.2px at 60% 90%, rgba(244, 214, 122, 0.3), transparent 100%),
+        radial-gradient(1.4px 1.4px at 36% 96%, rgba(226, 171, 21, 0.3), transparent 100%);
+    animation: drift 46s ease-in-out infinite alternate;
+}
+
+.fog {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(70px);
+    opacity: 0.5;
+}
+
+.fog-one {
+    width: 34rem;
+    height: 34rem;
+    top: -10rem;
+    left: -8rem;
+    background: radial-gradient(circle, rgba(226, 171, 21, 0.16), transparent 70%);
+    animation: floatOne 26s ease-in-out infinite;
+}
+
+.fog-two {
+    width: 30rem;
+    height: 30rem;
+    bottom: -12rem;
+    right: -8rem;
+    background: radial-gradient(circle, rgba(226, 171, 21, 0.1), transparent 70%);
+    animation: floatTwo 32s ease-in-out infinite;
+}
+
+.noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============ Card ============ */
+.card-glow {
+    position: relative;
+}
+
+.card-glow::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 1.75rem;
+    background: linear-gradient(160deg, rgba(226, 171, 21, 0.55), transparent 42%,
+        transparent 58%, rgba(226, 171, 21, 0.3));
+    filter: blur(16px);
+    opacity: 0.55;
+    z-index: -1;
+    animation: glowPulse 7s ease-in-out infinite;
+}
+
+.card {
+    position: relative;
+    box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.9);
+}
+
+/* ============ Steps ============ */
+.step {
+    display: none;
+}
+
+.step.is-active {
+    display: block;
+    animation: stepIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.dot {
+    height: 6px;
+    width: 1.5rem;
+    border-radius: 9999px;
+    background: #2f3031;
+    transition: all 0.4s ease;
+}
+
+.dot.active {
+    background: linear-gradient(90deg, #F4D67A, #E2AB15);
+    box-shadow: 0 0 12px rgba(226, 171, 21, 0.5);
+}
+
+/* ============ Form ============ */
+.label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #a3a3a3;
+}
+
+.input-field {
+    width: 100%;
+    border-radius: 0.9rem;
+    border: 1px solid #3a3b3c;
+    background: rgba(0, 0, 0, 0.45);
+    padding: 0.85rem 1.1rem;
+    font-size: 0.875rem;
+    color: #f5f5f5;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.input-field::placeholder {
+    color: #6b6b6b;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: rgba(226, 171, 21, 0.75);
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 0 3px rgba(226, 171, 21, 0.16);
+}
+
+.error {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    color: #f87171;
+}
+
+.error.hidden,
+.btn-ghost.hidden {
+    display: none;
+}
+
+/* ============ Photo frame ============ */
+.photo-frame {
+    position: relative;
+    width: 9rem;
+    aspect-ratio: 1 / 1;
+    padding: 6px;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(226, 171, 21, 0.45);
+    background: linear-gradient(160deg, rgba(226, 171, 21, 0.12), rgba(0, 0, 0, 0.55));
+    box-shadow: inset 0 0 0 1px rgba(226, 171, 21, 0.12), 0 14px 34px -18px rgba(226, 171, 21, 0.55);
+    transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.photo-frame:hover {
+    transform: translateY(-2px);
+    box-shadow: inset 0 0 0 1px rgba(226, 171, 21, 0.2), 0 18px 40px -16px rgba(226, 171, 21, 0.7);
+}
+
+.photo-frame::before,
+.photo-frame::after {
+    content: "";
+    position: absolute;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-color: #E2AB15;
+    border-style: solid;
+}
+
+.photo-frame::before {
+    top: -3px;
+    left: -3px;
+    border-width: 2px 0 0 2px;
+    border-top-left-radius: 1.4rem;
+}
+
+.photo-frame::after {
+    bottom: -3px;
+    right: -3px;
+    border-width: 0 2px 2px 0;
+    border-bottom-right-radius: 1.4rem;
+}
+
+@media (min-width: 640px) {
+    .photo-frame {
+        width: 10rem;
+    }
+}
+
+/* ============ Buttons ============ */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.95rem;
+    padding: 0.85rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #161204;
+    background: linear-gradient(180deg, #F4D67A, #E2AB15 55%, #B98C0D);
+    box-shadow: 0 12px 32px -14px rgba(226, 171, 21, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease, opacity 0.25s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    filter: brightness(1.06);
+}
+
+.btn-primary:active:not(:disabled) {
+    transform: translateY(0) scale(0.99);
+}
+
+.btn-primary:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    border-radius: 0.95rem;
+    padding: 0.85rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #d4d4d4;
+    border: 1px solid #3f4041;
+    background: rgba(0, 0, 0, 0.25);
+    transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+
+.btn-ghost:hover {
+    border-color: rgba(226, 171, 21, 0.55);
+    color: #F4D67A;
+    background: rgba(226, 171, 21, 0.06);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    border-radius: 0.95rem;
+    padding: 0.65rem 1.15rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #E2AB15;
+    border: 1px solid rgba(226, 171, 21, 0.45);
+    background: rgba(226, 171, 21, 0.07);
+    transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+
+.btn-secondary:hover {
+    border-color: rgba(226, 171, 21, 0.8);
+    background: rgba(226, 171, 21, 0.14);
+    transform: translateY(-1px);
+}
+
+/* ============ Organ cards ============ */
+.organ-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.55rem;
+    border-radius: 1.1rem;
+    border: 1px solid #353637;
+    background: rgba(0, 0, 0, 0.32);
+    padding: 1rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: #c4c4c4;
+    transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease,
+        transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.organ-card svg {
+    width: 1.75rem;
+    height: 1.75rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: color 0.25s ease, filter 0.25s ease;
+}
+
+.organ-card:hover {
+    border-color: rgba(226, 171, 21, 0.5);
+    color: #F4D67A;
+    transform: translateY(-2px);
+}
+
+.organ-card[aria-pressed="true"] {
+    border-color: #E2AB15;
+    color: #F4D67A;
+    background: linear-gradient(160deg, rgba(226, 171, 21, 0.18), rgba(226, 171, 21, 0.04));
+    box-shadow: 0 0 0 1px rgba(226, 171, 21, 0.35), 0 12px 28px -16px rgba(226, 171, 21, 0.9);
+}
+
+.organ-card[aria-pressed="true"] svg {
+    filter: drop-shadow(0 0 8px rgba(226, 171, 21, 0.6));
+}
+
+/* ============ Progress ============ */
+.progress-track {
+    height: 8px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 9999px;
+    background: #232425;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.progress-fill {
+    position: relative;
+    height: 100%;
+    width: calc(var(--progress, 0) * 1%);
+    border-radius: inherit;
+    background: linear-gradient(90deg, #B98C0D, #E2AB15 55%, #F4D67A);
+    box-shadow: 0 0 14px rgba(226, 171, 21, 0.6);
+    transition: width 0.3s ease;
+    overflow: hidden;
+}
+
+.progress-fill::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+    transform: translateX(-100%);
+    animation: shimmer 1.6s linear infinite;
+}
+
+.ritual-orb {
+    position: relative;
+    width: 6.5rem;
+    height: 6.5rem;
+    display: grid;
+    place-items: center;
+}
+
+.orb-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    border: 1px solid rgba(226, 171, 21, 0.35);
+    border-top-color: #E2AB15;
+    animation: spin 3.2s linear infinite;
+}
+
+.orb-ring:nth-child(2) {
+    inset: 12px;
+    border-color: rgba(226, 171, 21, 0.2);
+    border-bottom-color: #F4D67A;
+    animation-duration: 4.6s;
+    animation-direction: reverse;
+}
+
+.orb-core {
+    width: 3.4rem;
+    height: 3.4rem;
+    border-radius: 9999px;
+    background: radial-gradient(circle at 35% 30%, rgba(244, 214, 122, 0.9), rgba(226, 171, 21, 0.35) 55%, rgba(226, 171, 21, 0.05) 75%);
+    filter: blur(2px);
+    animation: corePulse 2.4s ease-in-out infinite;
+}
+
+/* ============ Success check ============ */
+.check-circle {
+    width: 4.5rem;
+    height: 4.5rem;
+}
+
+.check-ring {
+    stroke: rgba(226, 171, 21, 0.35);
+    stroke-width: 2;
+    stroke-dasharray: 150;
+    stroke-dashoffset: 150;
+}
+
+.check-mark {
+    stroke: #E2AB15;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 55;
+    stroke-dashoffset: 55;
+}
+
+.check-circle.is-playing .check-ring {
+    animation: drawRing 0.8s ease forwards;
+}
+
+.check-circle.is-playing .check-mark {
+    animation: drawMark 0.6s 0.45s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+/* ============ Animations ============ */
+@keyframes stepIn {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 0.75;
+    }
+}
+
+@keyframes drift {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+    to {
+        transform: translate3d(2.5%, -3%, 0);
+    }
+}
+
+@keyframes floatOne {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(6rem, 4rem) scale(1.12);
+    }
+}
+
+@keyframes floatTwo {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(-5rem, -3.5rem) scale(1.08);
+    }
+}
+
+@keyframes shimmer {
+    to {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes corePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.85;
+    }
+    50% {
+        transform: scale(1.14);
+        opacity: 1;
+    }
+}
+
+@keyframes drawRing {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes drawMark {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .stars,
+    .fog,
+    .progress-fill::after,
+    .orb-ring,
+    .orb-core,
+    .card-glow::before {
+        animation: none;
+    }
+}
